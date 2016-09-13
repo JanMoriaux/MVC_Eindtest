@@ -1,0 +1,67 @@
+﻿@model MVC_VideoVerhuur.Models.LoginViewModel
+@{
+    ViewBag.Title = "Aanmelden";
+}
+
+@if (Session.Keys.Count == 0)
+{
+    @*<form method="post" action="~/Home/Index" class="form-horizontal">*@
+    @*<div class="form-group">
+            <div class="col-md-2 control-label">@Html.LabelFor(m => m.Naam)</div>
+            <div class="col-md-6">
+                @Html.EditorFor(m=> m.Naam)
+            </div>
+            <div class="col-md-4">@Html.ValidationMessageFor(m => m.Naam)</div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-2 control-label">@Html.LabelFor(m => m.PostCode)</div>
+            <div class="col-md-6">
+                @Html.EditorFor(m => m.PostCode)
+            </div>
+            <div class="col-md-4">
+                @Html.ValidationMessageFor(m => m.PostCode)
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" class="btn btn-primary btn-lg" value="Aanmelden" />
+            </div>
+        </div>*@
+using (Html.BeginForm())
+{
+    <table>
+        <tr>
+            <td class="col-md-1">@Html.LabelFor(m => m.Naam)</td>
+            <td class="col-md-3">@Html.EditorFor(m => m.Naam)</td>            
+        </tr>
+        <tr>
+            <td class="col-md-1">@Html.LabelFor(m => m.PostCode)</td>
+            <td class="col-md-3">@Html.EditorFor(m => m.PostCode)</td>            
+        </tr>        
+    </table>
+    @Html.ValidationSummary();
+    <br />
+    <p class="col-md-offset-2 col-md-10">
+        <input type="submit" class="btn btn-primary btn-lg" value="Aanmelden" />
+    </p>
+    }
+
+}
+else
+{
+    if (Session["klant"] == null)
+    {
+        Session.Clear();
+        <h2>
+            @Html.ActionLink("Foutieve gegevens, probeer opnieuw!",
+       "Uitloggen", "Home", new { @class = "lead" })
+        </h2>
+    }
+    else
+    {
+        <h2>
+            @Html.ActionLink("Ga naar verhuringen",
+       "Index", "Genre", null, new { @class = "lead" })
+        </h2>
+    }
+}

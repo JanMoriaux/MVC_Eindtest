@@ -1,0 +1,35 @@
+﻿@model List<MVC_VideoVerhuur.Models.Film>
+@{
+    ViewBag.Title = "Winkelmandje";
+}
+
+<p class="lead">@ViewBag.Title</p>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Titel</th>
+            <th class="text-right">Prijs</th>
+            <th class="text-center">Verwijderen</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var film in Model)
+        {
+            <tr>
+                <td class="col col-md-4">@Html.DisplayFor(m => film.Titel)</td>
+                <td class="text-right">@Html.DisplayFor(m => film.Prijs)</td>
+                <td class="text-center">
+                    <a href="@Url.Action("DeleteFromBasket","Verhuur", new { id = film.BandNr })">
+                        <img src="~/Images/delete.png" alt="Verwijderen" width="15" heigth="15" />
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@Html.ActionLink("Verder winkelen", "Index", "Genre")
+
+@section Kassabutton{   
+        <div class="col col-md-1">@Html.ActionLink("Afrekenen", "Afrekenen", "Verhuur", null ,new { @class = "btn btn-default"})</div>
+}
+

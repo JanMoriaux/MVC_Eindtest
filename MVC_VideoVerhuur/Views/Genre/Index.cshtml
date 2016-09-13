@@ -1,0 +1,16 @@
+﻿@model List<MVC_VideoVerhuur.Models.Genre>
+
+@{
+    ViewBag.Title = "Genres";
+}
+
+<p class="lead">Klik op het gewenste genre</p>
+<nav>
+    <ul class="nav nav-pills">
+        @foreach (var item in Model)
+        {
+            <li>@Html.ActionLink(@item.GenreSoort,"Detail",new { id = @item.GenreNr })</li>
+        }
+    </ul>
+</nav>
+

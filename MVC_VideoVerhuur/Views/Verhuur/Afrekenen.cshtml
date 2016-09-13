@@ -1,0 +1,40 @@
+﻿@model List<MVC_VideoVerhuur.Models.Film>
+
+@{
+    ViewBag.Title = "Afrekenen";
+}
+
+<p class="lead">@ViewBag.Title</p>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th class="col col-md-4">Titel</th>
+            <th class="text-right col col-md-1">Prijs</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+        decimal totaal=0.00m;
+        }
+
+        @foreach (var film in Model)
+        {
+            <tr>
+                <td class="col col-md-4">@Html.DisplayFor(m => film.Titel)</td>
+                <td class="text-right col col-md-1">@Html.DisplayFor(m => film.Prijs)</td>
+            </tr>
+            totaal += film.Prijs;
+        }         
+            <tr>
+                <td class="text-right col col-md-4"><strong>Totaal:</strong></td>
+                <td class="text-right col col-md-1">@Html.DisplayFor(m => totaal)</td>
+            </tr>        
+    </tbody>
+</table>
+<p>Wordt gefactureerd aan: </p>
+<div class="well col-md-5">
+    @ViewBag.Klant.Voornaam @ViewBag.Klant.Naam<br />
+    @ViewBag.Klant.Straat_Nr<br />
+    @ViewBag.Klant.PostCode @ViewBag.Klant.Gemeente
+</div>
+

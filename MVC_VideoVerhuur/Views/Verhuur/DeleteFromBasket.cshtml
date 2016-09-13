@@ -1,0 +1,33 @@
+﻿@model MVC_VideoVerhuur.Models.Film
+
+@{
+    ViewBag.Title = "Verwijderen";
+}
+
+<p class="lead">Verwijder gehuurde film</p>
+<p>Ben je zeker dat je "@Model.Titel" niet wil huren?</p>
+<div>
+    @*<row>
+            @using (Html.BeginForm("ExecuteDelete", "Verhuur", new { id = Model.BandNr }, FormMethod.Post))
+            {
+        <div class="col col-md-2">
+                <input type="submit" value="Ja" class="btn btn-default" />
+            }
+        </div>
+        <div class="col col-md-offset-1 col-md-2">
+            <button class="btn btn-default" 
+        </div>
+    </row>*@
+    <form>
+        <div class="form-group row">
+            <div class="col col-md-offset-1 col-md-1">
+            <button class="btn btn-default" formaction="~/Verhuur/ExecuteDelete/@Model.BandNr" 
+                    formmethod="post">Ja</button>
+            </div>
+            <div class="col col-md-offset-1 col-md-1">
+                <button class="btn btn-default" formaction="~/Verhuur/Basket"
+                        formmethod="get">Nee</button>
+            </div>
+        </div>
+    </form>
+</div>

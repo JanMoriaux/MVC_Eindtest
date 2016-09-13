@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - VDAB Movies</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body class="container">
+    <div class="well">
+        <h2><img src="~/Images/videoVerhuur.jpg" alt="logo" width="100" height="100" style="margin-right: 10px" />VDAB Movies</h2>
+    </div>
+
+    <div>
+        @if (Session["klant"] != null)
+        {
+            var klant = (MVC_VideoVerhuur.Models.Klant)Session["klant"];
+            <span class="alert alert-info">
+                Welkom, @klant.Voornaam.ToUpper() @klant.Naam.ToUpper()
+            </span>
+            <div style="float: right">
+                @RenderSection("Kassabutton", false)
+                <div class="col col-md-offset-3 col-md-1">
+                    @Html.ActionLink("Uitloggen", "Uitloggen",
+           "Home", null, new { @class = "btn btn-default" })
+                </div>
+            </div>
+        }
+        else
+        {
+            <span class="alert alert-danger">
+                @Html.ActionLink("Eerst aanmelden om te kunnen huren!", "Index", "Home")
+            </span>
+        }
+    </div>
+
+    <div style="margin-top: 50px;">
+        @RenderBody()
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundels/jqueryval")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

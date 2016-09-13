@@ -1,0 +1,47 @@
+﻿@model List<MVC_VideoVerhuur.Models.Film>
+
+@{
+    ViewBag.Title = ViewBag.Genre.GenreSoort;
+}
+
+<h2>@ViewBag.Title</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Titel</th>
+            <th>Prijs</th>
+            <th>In Voorraad</th>
+            <th>Huren</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            if (Session[item.BandNr.ToString()] == null)
+            {
+            <tr>
+                <td>@Html.DisplayFor(m => item.Titel)</td>
+                <td >@Html.DisplayFor(m => item.Prijs)</td>
+                <td >@Html.DisplayFor(m => item.InVoorraad)</td>
+                <td>
+                    @if (item.InVoorraad > 0)
+                    {
+                        <a href='@Url.Action("AddToBasket","Verhuur",
+                            new { id = item.BandNr })' >
+                            Huren
+                        </a>
+                         
+                    }
+                    else
+                    {
+                        <label class="label-danger">Niet in voorraad</label>
+                    }
+
+                </td>
+            </tr>
+            }
+        }
+    </tbody>
+</table>
+@Html.ActionLink("Terug naar genreoverzicht","Index","Genre",new { @class="btn btn-primary"})
+
